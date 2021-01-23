@@ -70,6 +70,11 @@ func (g *Gen) Build(config *Config) error {
 		return err
 	}
 
+	if len(g.files) == 0 {
+		log.L.Infow("Not files found ,exiting...")
+		return nil
+	}
+
 	if err := g.parseFile(); err != nil {
 		return err
 	}
