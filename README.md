@@ -53,6 +53,15 @@ func FindBy(id int, columns ...string){
 
 本工具支持：`homebrew`、`scoop`直接下载
 
+```
+brew install HYY-yu/tap/gopo
+```
+
+```
+scoop bucket add gopo https://github.com/HYY-yu/scoop-bucket
+scoop install gopo/gopo
+```
+
 也可在`github release`中下载打好的包
 
 ```
