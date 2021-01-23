@@ -104,3 +104,28 @@ brews:
     install: |
       system "rm -f #{bin}/gopo"
       bin.install "gopo"
+scoop:
+  # Template for the url which is determined by the given Token (github or gitlab)
+  # Default for github is "https://github.com/<repo_owner>/<repo_name>/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+  # Default for gitlab is "https://gitlab.com/<repo_owner>/<repo_name>/uploads/{{ .ArtifactUploadHash }}/{{ .ArtifactName }}"
+  # Default for gitea is "https://gitea.com/<repo_owner>/<repo_name>/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+  url_template: "https://github.com/HYY-yu/gopo/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+
+  # Repository to push the app manifest to.
+  bucket:
+    owner: HYY-yu
+    name: scoop-bucket
+
+  # Git author used to commit to the repository.
+  # Defaults are shown.
+  commit_author:
+    name: goreleaserbot
+    email: goreleaser@carlosbecker.com
+
+  # The project name and current git tag are used in the format string.
+  commit_msg_template: "Scoop update for {{ .ProjectName }} version {{ .Tag }}"
+
+  # Persist data between application updates
+  persist:
+    - "data"
+    - "config.toml"
