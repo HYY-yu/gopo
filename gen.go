@@ -142,11 +142,12 @@ func (g *Gen) parseStruct(typeSpec *ast.TypeSpec) (*GenStructInfo, error) {
 				// 2. 取tag
 				var useNameStrategyFlag = true
 				fieldName := field.Names[0].Name
-				jsonTagName := parseJsonTag2JsonName(field.Tag.Value)
-				gormTagName := parseGormTag2ColumnName(field.Tag.Value)
-
+				
 				// 如果设置了useTag
-				if g.config.UseTag {
+				if g.config.UseTag && field.Tag != nil {
+					jsonTagName := parseJsonTag2JsonName(field.Tag.Value)
+					gormTagName := parseGormTag2ColumnName(field.Tag.Value)
+
 					if len(jsonTagName) > 0 && jsonTagName != "-" {
 						fieldName = jsonTagName
 						useNameStrategyFlag = false
